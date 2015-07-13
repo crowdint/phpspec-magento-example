@@ -1,0 +1,12 @@
+.DS_Store
+bin/
+composer.lock
+vendor/
+magento/app/etc/local.xml
+magento/media/*
+magento/var/*
+magento/downloader/pearlib/download/*
+magento/downloader/.cache/*
+magento/downloader/cache.cfg
+magento/downloader/connect.cfg
+
