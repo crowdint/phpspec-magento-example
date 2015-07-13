@@ -1,0 +1,21 @@
+{
+    "require-dev": {
+        "magetest/magento-phpspec-extension": "~2.0"
+    },
+    "config": {
+        "bin-dir": "bin"
+    },
+    "autoload": {
+        "psr-0": {
+            "": [
+                "magento/app",
+                "magento/app/code/local",
+                "magento/app/code/community",
+                "magento/app/code/core",
+                "magento/lib"
+            ]
+        }
+    },
+    "minimum-stability": "dev"
+}
+

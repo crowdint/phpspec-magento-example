@@ -1,0 +1,12 @@
+bin/
+composer.lock
+vendor/
+.DS_Store
+app/etc/local.xml
+downloader/pearlib/cache/*
+downloader/pearlib/download/*
+downloader/.cache/*
+downloader/cache.cfg
+downloader/connect.cfg
+media/*
+var/*
