@@ -1,0 +1,3 @@
+# CrowdPHPSpecTraining
+
+Learning PHPSpec
