@@ -4,5 +4,10 @@
 	},
 	"config": {
 		"bin-dir": "bin"
-	}
+	},
+    "autoload": {
+        "psr-0": {
+             "Crowd\\Store": "src"
+         }
+    }
 }
