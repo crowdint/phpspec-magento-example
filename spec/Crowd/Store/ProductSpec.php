@@ -7,6 +7,12 @@ use Prophecy\Argument;
 
 class ProductSpec extends ObjectBehavior
 {
+    function let(){
+        $name   = 'TestProductName';
+        $sku    = '12345';
+        $this->beConstructedWith($name, $sku);
+    }
+
     function it_is_initializable()
     {
         $this->shouldHaveType('Crowd\Store\Product');
