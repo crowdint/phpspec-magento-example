@@ -115,7 +115,7 @@ And you will see:
 Will return this message:
 
 ```bash
-Specification for Crowd\Store\Product created in [magentoroot]/spec/Crowd/Store/ProductSpec.php
+Specification for Crowd\Store\Product created in [rootproject]/spec/Crowd/Store/ProductSpec.php
 ```
 
 In your folder project now you will see
@@ -171,7 +171,7 @@ class Product
 }
 ```
 
-Now inside [magentoroot]/spec/Crowd/Store/ProductSpec.php file, write the next functions
+Now inside [rootproject]/spec/Crowd/Store/ProductSpec.php file, write the next functions
 
 ```php
 function it_should_have_a_name()
@@ -237,7 +237,7 @@ Press Y + return key again:
 
 What does this mean? First of all, PHPSpec checks if getName() and getSku() functions exists in the Product class, and if it does not find them, asks us if we want to crete them. Once created, PHPSpec will try to run the tests, but they do not pass.
 
-The Product.php file under [magentoroot]/src/Crowd/Store/ changed its content and now looks like:
+The Product.php file under [rootproject]/src/Crowd/Store/ changed its content and now looks like:
 
 ```php
 <?php
