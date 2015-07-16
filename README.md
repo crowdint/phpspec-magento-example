@@ -2,7 +2,7 @@
 
 At Crowd Interactive, we are interested in testing all our code and Magento is not the exception. We are implementing the [MageTest/MageSpec](http://tinyurl.com/nednm2x) Module based on [PHPSpec](http://tinyurl.com/q6xqvgo) toolset.
 
-In this implementation, we have two different tests taken from the [Magecasts](http://tinyurl.com/qxs5ux8) tutorials. The first one is to understand how PHPSpec works.
+In this implementation, we have two different tests taken from the [Magecasts](http://tinyurl.com/qxs5ux8) tutorials. The first one is to understand how PHPSpec works and the second is to show how MageSpec works.
 
 ## First Test
 
@@ -320,3 +320,43 @@ Now on the console, type once again
 (http://i.imgur.com/YEOFaUC.png)
 
 And we did it, friends!.
+
+## Second Test
+
+In this case we are going to show how you can test your Magento modules using [MageSpec](http://tinyurl.com/nednm2x)
+
+### Getting Started
+
+#### Update composer.json
+
+We have to update our composer.json file with the below data
+
+```json
+{
+	"require-dev": {
+		"psy/psysh": "@stable",
+        "magetest/magento-phpspec-extension": "~2.0"
+	},
+	"config": {
+		"bin-dir": "bin"
+	},
+    "autoload": {
+        "psr-0": {
+             "": [
+                "magento/app",
+                "magento/app/code/local",
+                "magento/app/code/community",
+                "magento/app/code/core",
+                "magento/lib"
+             ]
+         }
+    },
+    "minimum-stability": "dev"
+}
+```
+
+
+After type on terminal this
+
+    $ composer update
+
