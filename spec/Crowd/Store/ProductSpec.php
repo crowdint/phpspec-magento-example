@@ -7,7 +7,7 @@ use Prophecy\Argument;
 
 class ProductSpec extends ObjectBehavior
 {
-    function let()
+    /*function let()
     {
         $name   = "Testing Spec";
         $sku    = "12345";
@@ -27,5 +27,5 @@ class ProductSpec extends ObjectBehavior
     function it_should_have_sku()
     {
         $this->getSku()->shouldReturn('12345');  
-    }
+    }*/
 }

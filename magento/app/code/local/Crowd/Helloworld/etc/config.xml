@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <modules>
+        <Crowd_Helloworld>
+            <version>0.1.0</version>
+        </Crowd_Helloworld>
+    </modules>
+    <global>
+        <blocks>
+            <crowd_helloworld>
+                <class>Crowd_Helloworld_Block</class>
+            </crowd_helloworld>
+        </blocks>
+    </global>
+</config>
