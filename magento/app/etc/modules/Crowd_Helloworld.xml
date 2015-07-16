@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <Crowd_Helloworld>
+        <active>true</active>
+        <codePool>local</codePool>
+    </Crowd_Helloworld>
+</config>
