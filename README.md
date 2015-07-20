@@ -481,3 +481,34 @@ class Crowd_Helloworld_Block_Message extends Mage_Core_Block_Abstract
 ```
 
 This is very great, becouse it also create for us the configuration structure for a Magento module with a blocks class declaration, in this case by the "describe:block" command.
+
+Inside of [rootproject]/spec/app/code/local/Crowd/Helloworld/Block/MessageSpec.php type the following method to catch a message thtat returns frome the message() method in the Crowd_Helloworld_Block_Message class:
+
+```php
+function it_should_tell_you_that_you_must_be_registered(){
+	$this->message()->shouldReturn('Hello guest, Please register with us for special offers');
+}
+```
+
+Complete file looks like:
+
+```php
+<?php
+
+namespace spec;
+
+use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
+
+class Crowd_Helloworld_Block_MessageSpec extends ObjectBehavior
+{
+    function it_is_initializable()
+    {
+        $this->shouldHaveType('Crowd_Helloworld_Block_Message');
+    }
+
+    function it_should_tell_you_that_you_must_be_registered(){
+        $this->message()->shouldReturn('Hello guest, Please register with us for special offers');
+    }
+}
+```
