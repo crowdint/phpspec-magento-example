@@ -512,3 +512,45 @@ class Crowd_Helloworld_Block_MessageSpec extends ObjectBehavior
     }
 }
 ```
+
+On terminal, run phpspec again
+
+    $ bin/phpspec run
+
+You will see that exist to test methods to run, but just one of them pass, this is becouse an exception occurs looking for the message() inside of the block class.
+
+![message method does not exist](http://i.imgur.com/fZ8uhbk.png)
+
+Type the message() function in the Crowd_Helloworld_Block_Message class, the entire class will look like this:
+
+```php
+<?php
+
+class Crowd_Helloworld_Block_Message extends Mage_Core_Block_Abstract
+{
+
+    public function message(){}
+}
+```
+
+Run phpspec again an it will not pass, becouse the method exist but it not returns the right message
+
+![not message](http://i.imgur.com/fSdsxRx.png)
+
+Edit the file again to add a return message text inside the message() method, and the complete file will look like:
+
+```php
+<?php
+
+class Crowd_Helloworld_Block_Message extends Mage_Core_Block_Abstract
+{
+
+    public function message(){
+        return 'Hello guest, Please register with us for special offers';
+    }
+}
+```
+
+Run the phpspec commando to test and see what happened:
+
+![first method test pass](http://i.imgur.com/pKDs9pk.png)
