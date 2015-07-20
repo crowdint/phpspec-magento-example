@@ -554,3 +554,120 @@ class Crowd_Helloworld_Block_Message extends Mage_Core_Block_Abstract
 Run the phpspec commando to test and see what happened:
 
 ![first method test pass](http://i.imgur.com/pKDs9pk.png)
+
+That works, and is ok, we tested what should be the message for guest users, but what happened with registerd users yet. Update the MessageSpec.php file with the following code.
+
+```php
+<?php
+
+namespace spec;
+
+use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
+
+class Crowd_Helloworld_Block_MessageSpec extends ObjectBehavior
+{
+    function it_is_initializable()
+    {
+        $this->shouldHaveType('Crowd_Helloworld_Block_Message');
+    }
+
+    function it_should_tell_you_that_you_must_be_registered(){
+        $this->message()->shouldReturn('Hello guest, Please register with us for special offers');
+    }
+
+    function it_should_tell_you_a_welcome_message()
+    {
+        $this->message()->shouldReturn('Hello registered user');
+    }
+}
+```
+
+We've added the it_should_tell_you_a_welcome_message() test method that is looking for a "Hello registered user" return message in the same message() method.
+
+Run again the phpspec command and see wath happened:
+
+![one pass but other not](http://i.imgur.com/NpIJHSk.png)
+
+One of our test still working but the new does not work, why? Becouse our message method just return one message, we forget some logic to make possible have both message depending of the state of the current user.
+
+Let's create an adapter class to mock the Magento core code.
+
+Your Magento folder structure will look like:
+
+![magento module with adapter](http://i.imgur.com/LzgGqNO.png)
+
+In the State.php file add the following code:
+
+```php
+<?php
+
+class Crowd_Helloworld_Adapter_State {
+
+    public function isLoggedIn(){
+
+        if(Mage::getSingleton('customer/session')->isLoggedIn()){
+            return true;
+        } else {
+            return false;
+        }
+    }
+}
+```
+
+We will use the isLoggedIn() method after to check what happened if the user is logged in or not. Now in our Magento module block class define an private variable add the construct method at the beginning with the following data, this code with help us to mock the adapter and get the results we want without having to check the session/database:
+
+```php
+private $_stateAdapter;
+
+public function __construct(array $services = array()){
+	if (isset($services['state_adapter'])) {
+	    $this->_stateAdapter = $services['state_adapter'];
+	}
+	if (!$this->_stateAdapter instanceof Crowd_Helloworld_Adapter_State) {
+	    $this->_stateAdapter = new Crowd_Helloworld_Adapter_State();
+	}
+}
+```
+
+Now update the message method at the same class to looks like:
+
+```php
+public function message(){
+	$state = $this->_stateAdapter;
+	
+	if($state->isLoggedIn()){
+	    return 'Hello registered user';
+	} else {
+	    return 'Hello guest, Please register with us for special offers';
+	}
+}
+```
+
+Do you remember the let() method from previous article, we are going to use it again to construct our tests with the adapter data. The function let will look like:
+
+```php
+function let(\Crowd_Helloworld_Adapter_State $adapter)
+{
+	$this->beConstructedWith(array('state_adapter' => $adapter));
+}
+```
+
+And the last thing to do is update out test methods to looks like this:
+
+```php
+function it_should_tell_you_that_you_must_be_registered($adapter){
+	$adapter->isLoggedIn()->willReturn(false);
+	$this->message()->shouldReturn('Hello guest, Please register with us for special offers');
+}
+
+function it_should_tell_you_a_welcome_message($adapter)
+{
+	$adapter->isLoggedIn()->willReturn(true);
+	$this->message()->shouldReturn('Hello registered user');
+}
+```
+
+On terminal type phpspec run command onece again and it will work.
+
+![complete testing](http://i.imgur.com/YYAxydg.png)
