@@ -321,7 +321,7 @@ Now on the console, type once again
 
 And we did it, friends!.
 
-## Second Test
+## <a href="#second-test"></a>Second Test
 
 In this case we are going to show how you can test your Magento modules using [MageSpec](http://tinyurl.com/nednm2x)
 
@@ -355,6 +355,12 @@ We have to update our composer.json file with the below data
 }
 ```
 
+That json file contains the following changes: 
+
+<ol>
+	<li>The require dev modules are "psy/psysh" and "magetest/magento-phpspec-extension" intead of "phpspec/phpspec"</li>
+	<li>The autoload field is used to load all the Magento files</li>
+</ol>
 
 After type on terminal this
 
