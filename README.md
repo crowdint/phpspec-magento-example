@@ -325,6 +325,8 @@ And we did it, friends!.
 
 In this case we are going to show how you can test your Magento modules using [MageSpec](http://tinyurl.com/nednm2x)
 
+We are going to need a Magento installation inside of our root project.
+
 ### Getting Started
 
 #### Update composer.json
@@ -358,8 +360,8 @@ We have to update our composer.json file with the below data
 That json file contains the following changes: 
 
 <ol>
-	<li>The require dev modules are "psy/psysh" and "magetest/magento-phpspec-extension" intead of "phpspec/phpspec"</li>
-	<li>The autoload field is used to load all the Magento files</li>
+	<li>The require dev modules are "psy/psysh" and "magetest/magento-phpspec-extension" intead of "phpspec/phpspec".</li>
+	<li>The autoload field is used to load all the Magento files. As you see, a Magento installation called "magento" exist inside our root project.</li>
 </ol>
 
 After type on terminal this
@@ -397,3 +399,85 @@ And you will see something like this:
 ### Let's play with MageSpec
 
 As you see in the picture above there are some commands availables to work with PHPSpec, but also MageSpec has some useful description paramaters for the purposes of Magento.
+
+We are going to work with the describe:block command. Then below we type on terminal:
+
+    $ bin/phpspec describe:block crowd_helloworld/message
+
+It should generate the following:
+
+```bash
+Specification for Crowd_Helloworld_Block_Message created in [rootproject]spec/app/code/local/Crowd/Helloworld/Block/MessageSpec.php.
+```
+
+And you spec folder will look like:
+
+![spec local folder](http://i.imgur.com/BNac1nt.png)
+
+The MessageSpec.php file contains:
+
+```php
+<?php
+
+namespace spec;
+
+use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
+
+class Crowd_Helloworld_Block_MessageSpec extends ObjectBehavior
+{
+    function it_is_initializable()
+    {
+        $this->shouldHaveType('Crowd_Helloworld_Block_Message');
+    }
+}
+```
+
+Now, type on terminal:
+
+    $ bin/phpspec run
+
+You will see a message like this:
+
+![no class exist](http://i.imgur.com/eX1wQQb.png)
+
+Just as in the previous article, the message above occurs becouse the class does not exist, and MageSpec ask us if we wanto to creat it. Type yes of course and you will see a message like this:
+
+![helloworld_message class does not exist](http://i.imgur.com/DO7ao4a.png)
+
+Now inside your magento/app/ folder the following structure exist:
+
+![local app folders](http://i.imgur.com/wYRmkVH.png)
+
+The contain of the files creted are:
+
+###### config.xml
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <modules>
+        <Crowd_Helloworld>
+            <version>0.1.0</version>
+        </Crowd_Helloworld>
+    </modules>
+    <global>
+        <blocks>
+            <crowd_helloworld>
+                <class>Crowd_Helloworld_Block</class>
+            </crowd_helloworld>
+        </blocks>
+    </global>
+</config>
+```
+
+###### Message.php
+```php
+<?php
+
+class Crowd_Helloworld_Block_Message extends Mage_Core_Block_Abstract
+{
+
+}
+```
+
+This is very great, becouse it also create for us the configuration structure for a Magento module with a blocks class declaration, in this case by the "describe:block" command.
