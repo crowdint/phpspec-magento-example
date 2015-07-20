@@ -17,8 +17,7 @@ class Crowd_Helloworld_Block_MessageSpec extends ObjectBehavior
         $this->shouldHaveType('Crowd_Helloworld_Block_Message');
     }
 
-    function it_should_tell_you_that_you_most_register($adapter)
-    {
+    function it_should_tell_you_that_you_must_be_registered($adapter){
         $adapter->isLoggedIn()->willReturn(false);
         $this->message()->shouldReturn('Hello guest, Please register with us for special offers');
     }

@@ -2,6 +2,7 @@
 
 class Crowd_Helloworld_Block_Message extends Mage_Core_Block_Abstract
 {
+
     private $_stateAdapter;
 
     public function __construct(array $services = array()){
@@ -14,7 +15,6 @@ class Crowd_Helloworld_Block_Message extends Mage_Core_Block_Abstract
     }
 
     public function message(){
-
         $state = $this->_stateAdapter;
 
         if($state->isLoggedIn()){
@@ -22,6 +22,5 @@ class Crowd_Helloworld_Block_Message extends Mage_Core_Block_Abstract
         } else {
             return 'Hello guest, Please register with us for special offers';
         }
-        
     }
 }
