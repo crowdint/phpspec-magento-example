@@ -321,7 +321,7 @@ Now on the console, type once again
 
 And we did it, friends!.
 
-## Second Test
+## <a href="#second-test"></a>Second Test
 
 In this case we are going to show how you can test your Magento modules using [MageSpec](http://tinyurl.com/nednm2x)
 
