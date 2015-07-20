@@ -321,7 +321,7 @@ Now on the console, type once again
 
 And we did it, friends!.
 
-## <a href="#second-test"></a>Second Test
+## Second Test
 
 In this case we are going to show how you can test your Magento modules using [MageSpec](http://tinyurl.com/nednm2x)
 
@@ -366,3 +366,34 @@ After type on terminal this
 
     $ composer update
 
+### The configuration file
+
+Once composer update all the dependecies we have to create a configuration file called phpspec.yml in our root folder, this file will be used for PHPSpec to load the Magento Extension, the contains of this file is:
+
+```yml
+extensions: [MageTest\PhpSpec\MagentoExtension\Extension]
+mage_locator:
+  spec_prefix: 'spec'
+  src_path: 'magento/app/code'
+  spec_path: 'spec/app/code'
+  code_pool: 'local'
+```
+
+What the file structure means?
+
+- [extensions]: Who is the extension required
+- [src_path]: The path to store the generated classes. MageSpec creates the directories if they do not exist.
+- [spec_path]: The path of the specifications.
+- [code_pool]: The code pool to store the Magento module.
+
+Now we can run the following command:
+
+    $ bin/phpspec
+
+And you will see something like this:
+
+![bin/phpspec with MageSpec](http://i.imgur.com/GZyJn4v.png)
+
+### Let's play with MageSpec
+
+As you see in the picture above there are some commands availables to work with PHPSpec, but also MageSpec has some useful description paramaters for the purposes of Magento.
